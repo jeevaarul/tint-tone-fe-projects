@@ -77,15 +77,36 @@ export const logout = createAsyncThunk(
   }
 );
 
-const initialState = {
-  user: null,
-  token: null,
-  menu: [],
-  permissions: {},
-  isAuthenticated: false,
-  isLoading: false,
-  error: null,
+// Load state from localStorage
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('authState');
+    if (serializedState === null) {
+      return {
+        user: null,
+        token: null,
+        menu: [],
+        permissions: {},
+        isAuthenticated: false,
+        isLoading: false,
+        error: null,
+      };
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return {
+      user: null,
+      token: null,
+      menu: [],
+      permissions: {},
+      isAuthenticated: false,
+      isLoading: false,
+      error: null,
+    };
+  }
 };
+
+const initialState = loadState();
 
 const authSlice = createSlice({
   name: 'auth',
@@ -118,6 +139,16 @@ const authSlice = createSlice({
         state.permissions = action.payload.permissions;
         state.isAuthenticated = true;
         state.error = null;
+        // Save to localStorage
+        localStorage.setItem('authState', JSON.stringify({
+          user: action.payload.user,
+          token: action.payload.token,
+          menu: action.payload.menu,
+          permissions: action.payload.permissions,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        }));
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
@@ -162,6 +193,8 @@ const authSlice = createSlice({
         state.permissions = {};
         state.isAuthenticated = false;
         state.error = null;
+        // Clear localStorage
+        localStorage.removeItem('authState');
       });
   },
 });

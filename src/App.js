@@ -26,6 +26,9 @@ const theme = createTheme({
       main: '#dc004e',
     },
   },
+  // typography: {
+  //   fontFamily: "'Inter', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  // },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   },
