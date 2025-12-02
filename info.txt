@@ -1,0 +1,62 @@
+================================================================================
+✅ SEED DATA CREATED SUCCESSFULLY!
+================================================================================
+
+📊 Company: Tint & Tone Solutions
+📍 Branches: Chennai, Hyderabad, Bangalore, Mumbai
+👥 Teams: Sales & Marketing (all branches)
+🎭 Roles: 4 roles | 👤 Users: 23 users
+📋 Menus: 7 items
+
+================================================================================
+👤 USER CREDENTIALS (Password: SecurePass123!)
+================================================================================
+
+🔴 SUPER ADMIN (ALL_BRANCHES)
+   📧 rajesh.kumar@mailinator.com
+
+🟠 BRANCH ADMINS (OWN_BRANCH_ALL_TEAMS)
+   📧 priya.sharma@mailinator.com (Chennai)
+   📧 vikram.reddy@mailinator.com (Hyderabad)
+   📧 amit.singh@mailinator.com (Bangalore)
+   📧 neha.kapoor@mailinator.com (Mumbai)
+
+🟡 TEAM MANAGERS (OWN_BRANCH_TEAM)
+   📧 arun.krishnan@mailinator.com (Chennai Sales)
+   📧 deepa.nair@mailinator.com (Chennai Marketing)
+   📧 suresh.rao@mailinator.com (Hyderabad Sales)
+   📧 kavya.patel@mailinator.com (Hyderabad Marketing)
+   📧 rohan.mehta@mailinator.com (Bangalore Sales)
+   📧 sneha.joshi@mailinator.com (Bangalore Marketing)
+   📧 rahul.deshmukh@mailinator.com (Mumbai Sales)
+   📧 divya.kulkarni@mailinator.com (Mumbai Marketing)
+
+🟢 EMPLOYEES (OWN_DATA)
+   Chennai Sales:
+     📧 ramesh.babu@mailinator.com
+     📧 anitha.menon@mailinator.com
+   Chennai Marketing:
+     📧 karthik.iyer@mailinator.com
+     📧 lakshmi.sundaram@mailinator.com
+   Hyderabad Sales:
+     📧 sanjay.gupta@mailinator.com
+     📧 meera.singh@mailinator.com
+   Hyderabad Marketing:
+     📧 arjun.desai@mailinator.com
+     📧 pooja.verma@mailinator.com
+   Bangalore Sales:
+     📧 manoj.kumar@mailinator.com
+     📧 swati.rao@mailinator.com
+   Bangalore Marketing:
+     📧 nikhil.sharma@mailinator.com
+     📧 ritu.agarwal@mailinator.com
+   Mumbai Sales:
+     📧 vishal.patil@mailinator.com
+     📧 priyanka.shah@mailinator.com
+   Mumbai Marketing:
+     📧 akash.jain@mailinator.com
+     📧 shruti.malhotra@mailinator.com
+
+================================================================================
+🚀 API Documentation: http://localhost:8001/docs
+================================================================================

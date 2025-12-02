@@ -1,157 +1,265 @@
-# Tint Tone Frontend Projects
+# Quotation Management System
 
-A standalone React-based frontend application built with Material-UI, Redux Toolkit, and modern build tools.
+A production-ready React application for managing quotations with role-based access control, built with modern technologies and best practices.
 
-## Project Overview
+## 🚀 Tech Stack
 
-This project is a modern standalone React application that provides a dashboard and project management interface. It includes comprehensive tooling for development, testing, and production builds.
+- **Frontend**: React 18, Material-UI v5
+- **State Management**: Redux Toolkit + React Query
+- **Authentication**: JWT with refresh tokens
+- **Build Tool**: Webpack 5
+- **Code Quality**: ESLint, Prettier, Husky
+- **Testing**: Jest, React Testing Library
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn package manager
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd tint-tone-fe-projects
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Set up environment variables:
-   - Copy and modify the environment files as needed:
-     - `.env.development` - Development environment settings
-     - `.env.production` - Production environment settings
-     - `.env.uat` - UAT environment settings
-
-### Development
-
-1. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   The application will be available at `http://localhost:3003`
-
-2. Alternative development commands:
-   ```bash
-   npm start          # Start with webpack serve
-   npm run build:dev  # Build for development
-   ```
-
-### Build and Test
-
-#### Building the Application
-
-```bash
-# Development build
-npm run build:dev
-
-# UAT build
-npm run build:uat
-
-# Production build
-npm run build:prod
-
-# Standard production build
-npm run build
-```
-
-#### Running Tests
-
-```bash
-# Run tests
-npm test
-
-# Run tests in watch mode
-npm test -- --watch
-```
-
-## Project Structure
+## 📁 Project Structure
 
 ```
 src/
-├── components/          # Reusable UI components
-├── pages/              # Page components
-├── hooks/              # Custom React hooks
-├── services/           # API services
-├── utils/              # Utility functions
-├── contexts/           # React contexts
-├── config/             # Configuration files
-├── App.js              # Main application component
-└── index.js            # Application entry point
+├── api/                 # API configuration and interceptors
+├── auth/               # Authentication components
+├── components/         # Reusable UI components
+│   ├── common/        # Common components (ErrorBoundary, etc.)
+│   └── ui/            # UI components (Modal, Table, etc.)
+├── config/            # App configuration and constants
+├── hooks/             # Custom React hooks
+├── layouts/           # Layout components
+├── pages/             # Page components (lazy-loaded)
+├── routes/            # Route configuration
+├── services/          # API service layers
+├── store/             # Redux store and slices
+├── types/             # Type definitions
+└── utils/             # Utility functions
 ```
 
-## Key Features
+## 🔧 Installation & Setup
 
-- **Material-UI**: Modern React UI framework
-- **Redux Toolkit**: State management
-- **React Router**: Client-side routing
-- **Modern Build Tools**: Webpack 5 with optimized configurations
-- **Multi-environment Support**: Development, UAT, and Production configurations
-- **Testing Setup**: Jest and React Testing Library
-- **Modern Build Tools**: Webpack 5 with optimized configurations
+1. **Clone and install dependencies:**
+   ```bash
+   git clone <repository-url>
+   cd tint-tone-fe-projects
+   npm install
+   ```
 
-## Available Scripts
+2. **Environment setup:**
+   ```bash
+   cp .env.example .env.development
+   # Edit .env.development with your API endpoints
+   ```
 
-- `npm start` - Start development server with webpack serve
-- `npm run dev` - Start development server with environment variables
-- `npm run build` - Build for production
-- `npm run build:dev` - Build for development
-- `npm run build:uat` - Build for UAT
-- `npm run build:prod` - Build for production
-- `npm test` - Run tests
-- `npm run eject` - Eject from Create React App (not recommended)
+3. **Start development server:**
+   ```bash
+   npm run dev
+   ```
 
-## Environment Configuration
+## 🛠️ Available Scripts
 
-The application supports multiple environments through environment files:
+```bash
+# Development
+npm run dev              # Start development server
+npm start               # Alternative dev server
 
-- **Development** (`.env.development`): Local development settings
-- **UAT** (`.env.uat`): User Acceptance Testing environment
-- **Production** (`.env.production`): Production environment settings
+# Building
+npm run build           # Production build
+npm run build:dev       # Development build
+npm run build:uat       # UAT build
+npm run build:prod      # Production build
 
-Key environment variables:
-- `REACT_APP_API_ENDPOINT` - Backend API endpoint
-- `REACT_APP_WEBSOCKET_URI` - WebSocket connection URI
+# Code Quality
+npm run lint            # Run ESLint
+npm run format          # Format with Prettier
+npm test               # Run tests
 
-## Standalone Application
+# Git Hooks
+npm run prepare         # Setup Husky hooks
+```
 
-This is a standalone React application that runs independently without any micro-frontend dependencies.
+## 🔐 Authentication & Security
 
-## Contributing
+### JWT Implementation
+- **Access Token**: Stored in Redux state (memory)
+- **Refresh Token**: HTTP-only cookie (secure)
+- **Auto-refresh**: Automatic token renewal on 401 errors
+- **Role-based Access**: Admin, Manager, User roles
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### Security Features
+- XSS protection with DOMPurify
+- Input sanitization
+- Sensitive data masking
+- HTTPS-only cookies in production
+- Error boundary for graceful error handling
 
-## Technology Stack
+## 🎯 Key Features
 
-- **React 18** - UI library
-- **Material-UI v5** - Component library
-- **Redux Toolkit** - State management
-- **React Router v6** - Routing
-- **Webpack 5** - Module bundler
-- **Babel** - JavaScript compiler
-- **Jest** - Testing framework
-- **React Testing Library** - Testing utilities
+### Authentication Flow
+```javascript
+// Login process
+dispatch(login({ email, password }))
+  .unwrap()
+  .then(() => navigate('/dashboard'))
+  .catch(error => showError(error));
+```
 
-## Browser Support
+### Protected Routes
+```javascript
+<ProtectedRoute requiredRoles={[USER_ROLES.ADMIN]}>
+  <AdminPanel />
+</ProtectedRoute>
+```
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+### API Integration
+```javascript
+// Using custom hooks
+const { data, isLoading, error } = useApiQuery(
+  ['quotations', filters],
+  () => quotationService.getQuotations(filters)
+);
+```
 
-## License
+### Role-based UI
+```javascript
+// Menu filtering
+const filteredMenu = filterMenuByRole(menuItems, user.role);
+
+// Component visibility
+{hasPermission(user.role, [USER_ROLES.ADMIN]) && (
+  <AdminOnlyComponent />
+)}
+```
+
+## 📊 Performance Optimizations
+
+- **Code Splitting**: Lazy-loaded routes and components
+- **Memoization**: useMemo and useCallback for expensive operations
+- **Debounced API**: Search and filter operations
+- **Query Caching**: React Query with 5-minute stale time
+- **Bundle Optimization**: Webpack tree shaking and minification
+
+## 🧪 Testing Strategy
+
+```bash
+# Run tests with coverage
+npm test -- --coverage
+
+# Watch mode for development
+npm test -- --watch
+```
+
+## 🚀 Deployment
+
+### Environment Variables
+```bash
+# Required for all environments
+REACT_APP_API_BASE_URL=https://api.example.com
+REACT_APP_WEBSOCKET_URI=wss://api.example.com/ws
+
+# Optional
+REACT_APP_SENTRY_DSN=your-sentry-dsn
+REACT_APP_GOOGLE_ANALYTICS_ID=GA-XXXXXXXXX
+```
+
+### Build Commands
+```bash
+# Development
+npm run build:dev
+
+# UAT
+npm run build:uat
+
+# Production
+npm run build:prod
+```
+
+## 🔄 API Integration
+
+### Service Layer Example
+```javascript
+// services/quotationService.js
+export const quotationService = {
+  getQuotations: (params) => apiClient.get('/quotations', { params }),
+  createQuotation: (data) => apiClient.post('/quotations', data),
+  updateQuotation: (id, data) => apiClient.put(`/quotations/${id}`, data),
+  deleteQuotation: (id) => apiClient.delete(`/quotations/${id}`),
+};
+```
+
+### Error Handling
+- Global error interceptor
+- User-friendly error messages
+- Automatic retry for network errors
+- Role-based error responses
+
+## 🎨 UI Components
+
+### Reusable Components
+- **DataTable**: Sortable, paginated table with actions
+- **Modal**: Customizable dialog component
+- **LoadingSpinner**: Loading states with optional overlay
+- **ErrorBoundary**: Graceful error handling
+
+### Usage Examples
+```javascript
+<DataTable
+  data={quotations}
+  columns={columns}
+  onEdit={handleEdit}
+  onDelete={handleDelete}
+  selectable
+/>
+
+<Modal
+  open={isOpen}
+  title="Create Quotation"
+  onClose={handleClose}
+  actions={<Button>Save</Button>}
+>
+  <QuotationForm />
+</Modal>
+```
+
+## 🔧 Development Guidelines
+
+### Code Style
+- Use functional components with hooks
+- Implement proper error boundaries
+- Follow naming conventions (camelCase, PascalCase)
+- Add JSDoc comments for complex functions
+
+### State Management
+- Use Redux for global state (auth, UI)
+- Use React Query for server state
+- Keep local state minimal with useState
+
+### Performance Best Practices
+- Memoize expensive calculations
+- Use React.lazy for code splitting
+- Implement proper loading states
+- Debounce user inputs
+
+## 📝 Contributing
+
+1. Create feature branch from `develop`
+2. Follow coding standards (ESLint + Prettier)
+3. Write tests for new features
+4. Update documentation
+5. Submit pull request
+
+## 🐛 Troubleshooting
+
+### Common Issues
+- **Build fails**: Check Node.js version (16+ required)
+- **API errors**: Verify environment variables
+- **Auth issues**: Clear browser cookies and localStorage
+
+### Debug Mode
+```bash
+# Enable debug logging
+REACT_APP_DEBUG=true npm run dev
+```
+
+## 📄 License
 
 This project is private and proprietary.
+
+---
+
+**Note**: This is a scaffold setup. Implement actual pages and API endpoints based on your requirements.

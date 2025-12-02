@@ -1,68 +1,66 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+// React Query will be added later
+// import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { CssBaseline } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
-import Dashboard from './pages/Dashboard';
-import { useTokenExpiry } from './hooks/useTokenExpiry';
-import TokenExpiryDialog from './components/TokenExpiryDialog';
+import { store } from './store';
+import AppRoutes from './routes/AppRoutes';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import NotificationManager from './components/NotificationManager';
+import './App.css';
 
+// React Query client will be added later
+// const queryClient = new QueryClient({...});
+
+// Create MUI theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#f4511e',
+      main: '#d19a1e',
     },
     secondary: {
-      main: '#004068'
+      main: '#dc004e',
     },
-    error: {
-      main: '#f44336'
-    }
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
+    },
   },
 });
 
 function App() {
-  const { tokenExpired, handleTokenExpiryLogin } = useTokenExpiry();
-  
-  useEffect(() => {
-    const handleShellNavigation = (event) => {
-      // Handle shell navigation events
-    };
-
-    window.addEventListener('shell-navigation', handleShellNavigation);
-
-    return () => {
-      window.removeEventListener('shell-navigation', handleShellNavigation);
-    };
-  }, []);
-
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <SnackbarProvider maxSnack={3} anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}>
-            <NotificationManager />
-            <div>
-              <Routes>
-                <Route path="/" element={<Navigate to="/projects/list-projects" replace />} />
-                <Route path="/projects/list-projects" element={<Dashboard />} />
-              </Routes>
-              
-              {/* Global Token Expiry Dialog */}
-              <TokenExpiryDialog
-                open={tokenExpired}
-                onGoToLogin={handleTokenExpiryLogin}
-              />
-            </div>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <SnackbarProvider
+            maxSnack={3}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+          >
+            <BrowserRouter>
+              <AppRoutes />
+              <NotificationManager />
+            </BrowserRouter>
           </SnackbarProvider>
-        </LocalizationProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+        </ThemeProvider>
+      </Provider>
+    </ErrorBoundary>
   );
 }
 
