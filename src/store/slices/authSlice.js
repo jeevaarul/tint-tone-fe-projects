@@ -77,10 +77,10 @@ export const logout = createAsyncThunk(
   }
 );
 
-// Load state from localStorage
+// Load state from sessionStorage
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('authState');
+    const serializedState = sessionStorage.getItem('authState');
     if (serializedState === null) {
       return {
         user: null,
@@ -139,8 +139,8 @@ const authSlice = createSlice({
         state.permissions = action.payload.permissions;
         state.isAuthenticated = true;
         state.error = null;
-        // Save to localStorage
-        localStorage.setItem('authState', JSON.stringify({
+        // Save to sessionStorage
+        sessionStorage.setItem('authState', JSON.stringify({
           user: action.payload.user,
           token: action.payload.token,
           menu: action.payload.menu,
@@ -193,8 +193,8 @@ const authSlice = createSlice({
         state.permissions = {};
         state.isAuthenticated = false;
         state.error = null;
-        // Clear localStorage
-        localStorage.removeItem('authState');
+        // Clear sessionStorage
+        sessionStorage.removeItem('authState');
       });
   },
 });

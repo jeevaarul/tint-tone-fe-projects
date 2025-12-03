@@ -14,19 +14,19 @@ const Dashboard = () => {
   });
 
   return (
-    <Box sx={{ p: 4, backgroundColor: '#ffffff' }}>
+    <Box sx={{ p: '2vh 2vw', backgroundColor: '#ffffff' }}>
       {/* Breadcrumb */}
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: '1.5vh', fontSize: 'clamp(0.75rem, 0.9vw, 0.875rem)' }}>
         Admin / Organization Dashboard
       </Typography>
 
       {/* Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 4 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: '3vh' }}>
         <Box>
-          <Typography variant="h4" sx={{ fontWeight: 600, mb: 1 }}>
+          <Typography variant="h4" sx={{ fontWeight: 600, mb: '1vh', fontSize: 'clamp(1.25rem, 2vw, 1.75rem)' }}>
             Organization Dashboard
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" color="text.secondary" sx={{ fontSize: 'clamp(0.875rem, 1vw, 1rem)' }}>
             Visualize your complete organization hierarchy — branches, teams, managers, and users at a glance.
           </Typography>
         </Box>
@@ -36,12 +36,12 @@ const Dashboard = () => {
             startIcon={<DownloadOutlinedIcon />}
             sx={{
               textTransform: 'none',
-              padding: '10px 18px',
+              padding: 'clamp(8px, 1vh, 12px) clamp(14px, 1.5vw, 20px)',
               borderRadius: '10px',
               borderColor: '#e5e5e5',
               backgroundColor: '#f5f5f7',
               color: '#333',
-              fontSize: '14px',
+              fontSize: 'clamp(0.75rem, 0.9vw, 0.875rem)',
               fontWeight: 500,
               '&:hover': {
                 backgroundColor: '#ededf0',
@@ -58,8 +58,8 @@ const Dashboard = () => {
             startIcon={<AddIcon />}
             sx={{
               textTransform: 'none',
-              padding: '10px 18px',
-              fontSize: '14px',
+              padding: 'clamp(8px, 1vh, 12px) clamp(14px, 1.5vw, 20px)',
+              fontSize: 'clamp(0.75rem, 0.9vw, 0.875rem)',
               fontWeight: 600,
               borderRadius: '10px',
               backgroundColor: '#d4a017',
@@ -77,47 +77,47 @@ const Dashboard = () => {
       </Box>
 
       {/* KPI Cards */}
-      <Box sx={{ display: 'flex', gap: 3, mb: 4 }}>
-        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '20px 20px 5px', border: '1px solid #f1f1f1' }}>
-          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: 4 }}>Total branches</Typography>
+      <Box sx={{ display: 'flex', gap: '2vw', mb: '3vh' }}>
+        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '2vh 1.5vw 0.5vh', border: '1px solid #f1f1f1' }}>
+          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: '3vh', fontSize: 'clamp(0.875rem, 1vw, 1rem)' }}>Total branches</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '48px' }}>2</Typography>
-            <Chip label="Across India" sx={{ backgroundColor: '#e0e0e0', color: '#666', borderRadius: 5, px: 1 }} />
+            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)' }}>2</Typography>
+            <Chip label="Across India" sx={{ backgroundColor: '#e0e0e0', color: '#666', borderRadius: 5, px: 1, fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} />
           </Box>
         </Paper>
 
-        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '20px 20px 5px', border: '1px solid #f1f1f1' }}>
-          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: 4 }}>Total teams</Typography>
+        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '2vh 1.5vw 0.5vh', border: '1px solid #f1f1f1' }}>
+          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: '3vh', fontSize: 'clamp(0.875rem, 1vw, 1rem)' }}>Total teams</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '48px' }}>4</Typography>
-            <Chip label="Sales & Design" sx={{ backgroundColor: '#4caf50', color: 'white', borderRadius: 5, px: 1 }} />
+            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)' }}>4</Typography>
+            <Chip label="Sales & Design" sx={{ backgroundColor: '#4caf50', color: 'white', borderRadius: 5, px: 1, fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} />
           </Box>
         </Paper>
 
-        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '20px 20px 5px', border: '1px solid #f1f1f1' }}>
-          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: 4 }}>Total users</Typography>
+        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '2vh 1.5vw 0.5vh', border: '1px solid #f1f1f1' }}>
+          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: '3vh', fontSize: 'clamp(0.875rem, 1vw, 1rem)' }}>Total users</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '48px' }}>10</Typography>
-            <Chip label="Employees" sx={{ backgroundColor: '#2196f3', color: 'white', borderRadius: 5, px: 1 }} />
+            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)' }}>10</Typography>
+            <Chip label="Employees" sx={{ backgroundColor: '#2196f3', color: 'white', borderRadius: 5, px: 1, fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} />
           </Box>
         </Paper>
 
-        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '20px 20px 5px', border: '1px solid #f1f1f1' }}>
-          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: 4 }}>Total managers</Typography>
+        <Paper elevation={3} sx={{ borderRadius: 3, flex: 1, boxShadow: '0 4px 12px rgba(0,0,0,0.06)', background: '#fff', padding: '2vh 1.5vw 0.5vh', border: '1px solid #f1f1f1' }}>
+          <Typography variant="body1" sx={{ fontWeight: 500, color: '#666', mb: '3vh', fontSize: 'clamp(0.875rem, 1vw, 1rem)' }}>Total managers</Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: '48px' }}>2</Typography>
-            <Chip label="People managers" sx={{ backgroundColor: '#ff9800', color: 'white', borderRadius: 5, px: 1 }} />
+            <Typography variant="h2" sx={{ fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)' }}>2</Typography>
+            <Chip label="People managers" sx={{ backgroundColor: '#ff9800', color: 'white', borderRadius: 5, px: 1, fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} />
           </Box>
         </Paper>
       </Box>
 
       {/* Hierarchy View */}
-      <Box sx={{ borderRadius: 3, overflow: 'hidden',background:'#F3F6F7',padding:'1% 2%' }}>
-        <Box sx={{ padding:'9px 9px 15px', backgroundColor: '#F3F6F7' }}>
+      <Box sx={{ borderRadius: 3, overflow: 'hidden',background:'#F3F6F7',padding:'1vh 2vw' }}>
+        <Box sx={{ padding:'1vh 1vw 1.5vh', backgroundColor: '#F3F6F7' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>Hierarchy view</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 600, fontSize: 'clamp(1rem, 1.5vw, 1.25rem)' }}>Hierarchy view</Typography>
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-              <Button size="small" sx={{ textTransform: 'none', color: '#666' }}>
+              <Button size="small" sx={{ textTransform: 'none', color: '#666', fontSize: 'clamp(0.75rem, 0.9vw, 0.875rem)' }}>
                 Collapse all
               </Button>
               <Chip 
@@ -126,7 +126,7 @@ const Dashboard = () => {
                 clickable
                 onClick={() => setFilters({...filters, branch: !filters.branch})}
                 variant={filters.branch ? "filled" : "outlined"}
-                sx={{ fontSize: '11px' }} 
+                sx={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} 
               />
               <Chip 
                 label="Node" 
@@ -134,7 +134,7 @@ const Dashboard = () => {
                 clickable
                 onClick={() => setFilters({...filters, node: !filters.node})}
                 variant={filters.node ? "filled" : "outlined"}
-                sx={{ fontSize: '11px' }} 
+                sx={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} 
               />
               <Chip 
                 label="Team" 
@@ -142,7 +142,7 @@ const Dashboard = () => {
                 clickable
                 onClick={() => setFilters({...filters, team: !filters.team})}
                 variant={filters.team ? "filled" : "outlined"}
-                sx={{ fontSize: '11px' }} 
+                sx={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} 
               />
               <Chip 
                 label="Manager" 
@@ -150,7 +150,7 @@ const Dashboard = () => {
                 clickable
                 onClick={() => setFilters({...filters, manager: !filters.manager})}
                 variant={filters.manager ? "filled" : "outlined"}
-                sx={{ fontSize: '11px' }} 
+                sx={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} 
               />
               <Chip 
                 label="Employees" 
@@ -161,7 +161,7 @@ const Dashboard = () => {
                   backgroundColor: filters.employees ? '#4caf50' : 'transparent', 
                   color: filters.employees ? 'white' : '#666',
                   border: filters.employees ? 'none' : '1px solid #ccc',
-                  fontSize: '11px' 
+                  fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' 
                 }} 
               />
               <Chip 
@@ -170,13 +170,13 @@ const Dashboard = () => {
                 clickable
                 onClick={() => setFilters({...filters, count: !filters.count})}
                 variant={filters.count ? "filled" : "outlined"}
-                sx={{ fontSize: '11px' }} 
+                sx={{ fontSize: 'clamp(0.65rem, 0.8vw, 0.75rem)' }} 
               />
             </Box>
           </Box>
         </Box>
 
-        <Box sx={{backgroundColor: '#ffffff',borderRadius:'24px',boxShadow:'0 2px 10px rgba(15, 23, 42, 0.06)',padding:'16px 12px 16px 12px' }}>
+        <Box sx={{backgroundColor: '#ffffff',borderRadius:'24px',boxShadow:'0 2px 10px rgba(15, 23, 42, 0.06)',padding:'1.5vh 1vw' }}>
           {/* Organization */}
           <Box sx={{ 
             borderRadius: '24px',

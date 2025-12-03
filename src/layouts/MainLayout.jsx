@@ -29,7 +29,7 @@ import { headerMenuItems } from '../data/menuData';
 import Sidebar from './Sidebar';
 import ttLogo from '../assets/tt_logo.png';
 
-const DRAWER_WIDTH = 280;
+const DRAWER_WIDTH = '18vw'; // 18% of viewport width
 
 const MainLayout = ({ children }) => {
   const dispatch = useDispatch();
@@ -42,7 +42,15 @@ const MainLayout = ({ children }) => {
   // Use menu from API or fallback to static menu
   const headerMenu = menu.length > 0 ? menu : headerMenuItems;
   const filteredHeaderMenu = filterMenuByRole(headerMenu, user?.role);
-  const activeTab = filteredHeaderMenu.findIndex(item => location.pathname.startsWith(item.path));
+  const activeTab = filteredHeaderMenu.findIndex(item => {
+    // Check if current path matches item path
+    if (item.path && location.pathname.startsWith(item.path)) return true;
+    // Check if current path matches any child path
+    if (item.children && item.children.length > 0) {
+      return item.children.some(child => child.path && location.pathname.startsWith(child.path));
+    }
+    return false;
+  });
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -64,8 +72,19 @@ const MainLayout = ({ children }) => {
   const handleTabChange = (event, newValue) => {
     const selectedItem = filteredHeaderMenu[newValue];
     if (selectedItem) {
-      // Navigate to the base path first, then let the sidebar handle sub-navigation
-      navigate(selectedItem.path, { replace: false });
+      // If item has path, navigate to it
+      if (selectedItem.path) {
+        navigate(selectedItem.path, { replace: false });
+      } 
+      // If no path but has children, navigate to first child or use item name as path
+      else if (selectedItem.children && selectedItem.children.length > 0) {
+        const firstChildPath = selectedItem.children[0].path;
+        navigate(firstChildPath || `/${selectedItem.name}`, { replace: false });
+      }
+      // Fallback: use item name as path
+      else {
+        navigate(`/${selectedItem.name}`, { replace: false });
+      }
     }
   };
 
@@ -81,16 +100,16 @@ const MainLayout = ({ children }) => {
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
         }}
       >
-        <Toolbar sx={{ minHeight: '64px !important' }}>
+        <Toolbar sx={{ minHeight: '8vh !important', maxHeight: '64px' }}>
           {/* Logo */}
           <Box sx={{ mr: 3 }}>
             <img
               src={ttLogo}
               alt="TT Logo"
               style={{
-                height: '40px',
+                height: 'clamp(32px, 5vh, 48px)',
                 width: 'auto',
-                minWidth: '80px',
+                minWidth: 'clamp(60px, 8vw, 100px)',
                 objectFit: 'contain'
               }}
             />
@@ -104,10 +123,11 @@ const MainLayout = ({ children }) => {
               flexGrow: 1,
               '& .MuiTab-root': {
                 textTransform: 'none',
-                fontSize: '14px',
+                fontSize: 'clamp(0.75rem, 1vw, 0.875rem)',
                 fontWeight: 500,
                 color: '#666',
-                minHeight: '64px',
+                minHeight: '8vh',
+                maxHeight: '64px',
                 '&.Mui-selected': {
                   color: '#d19a1e',
                   backgroundColor: '#fff8e1',
@@ -138,19 +158,19 @@ const MainLayout = ({ children }) => {
             >
               <Avatar
                 sx={{
-                  width: 32,
-                  height: 32,
+                  width: 'clamp(28px, 3vw, 36px)',
+                  height: 'clamp(28px, 3vw, 36px)',
                   backgroundColor: '#d19a1e',
-                  fontSize: '14px',
+                  fontSize: 'clamp(0.75rem, 1vw, 0.875rem)',
                   fontWeight: 'bold'
                 }}
               >
                 {user?.firstName?.charAt(0)?.toUpperCase() || 'U'}
               </Avatar>
-              <Typography variant="body2" sx={{ ml: 1 }}>
+              <Typography variant="body2" sx={{ ml: 1, fontSize: 'clamp(0.75rem, 1vw, 0.875rem)' }}>
                 Hi, {user?.firstName || 'User'}
               </Typography>
-              <KeyboardArrowDown sx={{ fontSize: '16px' }} />
+              <KeyboardArrowDown sx={{ fontSize: 'clamp(14px, 1.5vw, 18px)' }} />
             </IconButton>
           </Box>
         </Toolbar>
@@ -188,9 +208,9 @@ const MainLayout = ({ children }) => {
           '& .MuiDrawer-paper': {
             width: DRAWER_WIDTH,
             boxSizing: 'border-box',
-            backgroundColor: '#f5f5f5',
-            borderRight: 'none',
-            mt: '64px'
+            backgroundColor: '#FFF9EC',
+            borderRight: '1px solid #00000000',
+            mt: 'clamp(56px, 8vh, 64px)'
           },
         }}
       >
@@ -203,8 +223,9 @@ const MainLayout = ({ children }) => {
         sx={{
           flexGrow: 1,
           backgroundColor: '#fafafa',
-          mt: '64px',
-          overflow: 'auto'
+          mt: 'clamp(56px, 8vh, 64px)',
+          // overflow: 'auto',
+          height: 'calc(100vh - clamp(56px, 8vh, 64px))'
         }}
       >
         {children}

@@ -20,6 +20,8 @@ const Clients = React.lazy(() => import('../pages/Clients'));
 const Admin = React.lazy(() => import('../pages/Admin'));
 const QuotationRequests = React.lazy(() => import('../pages/QuotationRequests'));
 const MenuItem1 = React.lazy(() => import('../pages/organization/MenuItem1'));
+const Company = React.lazy(() => import('../pages/organization/Company'));
+const Organization = React.lazy(() => import('../pages/Organization'));
 const Settings = React.lazy(() => import('../pages/Settings'));
 const Unauthorized = React.lazy(() => import('../pages/Unauthorized'));
 const NotFound = React.lazy(() => import('../pages/NotFound'));
@@ -113,12 +115,28 @@ const AppRoutes = () => {
                     element={<QuotationRequests />}
                   />
                   
+                  {/* Organization */}
+                  <Route
+                    path="organization"
+                    element={<Organization />}
+                  />
+                  
+                  {/* Company */}
+                  <Route
+                    path="company"
+                    element={
+                      <ProtectedRoute requiredModule="company">
+                        <Company />
+                      </ProtectedRoute>
+                    }
+                  />
+                  
                   {/* Companies */}
                   <Route
                     path="companies"
                     element={
                       <ProtectedRoute requiredModule="companies">
-                        <MenuItem1 />
+                        <Company />
                       </ProtectedRoute>
                     }
                   />

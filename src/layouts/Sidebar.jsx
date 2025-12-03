@@ -24,10 +24,13 @@ const Sidebar = () => {
 
   // Transform API menu structure to sidebar format
   function transformApiMenuToSidebar(apiMenu, currentPath) {
-    const currentSection = apiMenu.find(item => 
-      currentPath.startsWith(item.path) || 
-      item.children?.some(child => currentPath.startsWith(child.path))
-    );
+    const currentSection = apiMenu.find(item => {
+      if (item.path && currentPath.startsWith(item.path)) return true;
+      if (item.children?.length > 0) {
+        return item.children.some(child => child.path && currentPath.startsWith(child.path));
+      }
+      return false;
+    });
     
     if (!currentSection || !currentSection.children?.length) {
       return [];
@@ -50,24 +53,24 @@ const Sidebar = () => {
   };
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: '2vh 1.5vw' }}>
       {sidebarMenuItems.map((section) => {
         const filteredItems = filterMenuByRole(section.items, user?.role);
         
         if (filteredItems.length === 0) return null;
         
         return (
-          <Box key={section.id} sx={{ mb: 3 }}>
+          <Box key={section.id} sx={{ mb: '2vh' }}>
             {/* Section Title */}
             <Typography
               variant="subtitle2"
               sx={{
                 color: '#666',
-                fontSize: '12px',
+                fontSize: 'clamp(0.65rem, 0.9vw, 0.75rem)',
                 fontWeight: 500,
-                mb: 1,
+                mb: '1vh',
                 textTransform: 'uppercase',
-                letterSpacing: '0.5px'
+                letterSpacing: '0.03em'
               }}
             >
               {section.title}
@@ -79,13 +82,13 @@ const Sidebar = () => {
                 const isActive = location.pathname === item.path;
                 
                 return (
-                  <ListItem key={item.id} disablePadding sx={{ mb: 0.5 }}>
+                  <ListItem key={item.id} disablePadding sx={{ mb: '0.5vh' }}>
                     <ListItemButton
                       onClick={() => handleNavigation(item.path)}
                       sx={{
                         borderRadius: '8px',
-                        py: 1.5,
-                        px: 2,
+                        py: '1.2vh',
+                        px: '1vw',
                         backgroundColor: isActive ? '#e8d5a3' : 'transparent',
                         borderLeft: isActive ? '4px solid #d19a1e' : '4px solid transparent',
                         '&:hover': {
@@ -97,7 +100,7 @@ const Sidebar = () => {
                         primary={item.label}
                         sx={{
                           '& .MuiListItemText-primary': {
-                            fontSize: '14px',
+                            fontSize: 'clamp(0.75rem, 1vw, 0.875rem)',
                             fontWeight: isActive ? 600 : 400,
                             color: isActive ? '#8b6914' : '#333',
                           }

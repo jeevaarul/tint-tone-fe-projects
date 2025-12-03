@@ -5,6 +5,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionCache from './createEmotionCache';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import './utils/globalDownloadManager';
+import './styles/agGridCustom.css';
 
 const theme = createTheme();
 const emotionCache = createEmotionCache();
